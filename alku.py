@@ -3,6 +3,9 @@ import json
 
 JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/'
 
+usertags = raw_input("Kirjoita mielenkiinnonkohteesi: ") #tähän voisi listata pari esimerkki tägiä jsonista jotta käyttäjä pystyisi kirjoittamaan niitä.
+
+
 def get_activities():
     with urllib.request.urlopen(JSON_URL) as response:
         return json.loads(response.read())
