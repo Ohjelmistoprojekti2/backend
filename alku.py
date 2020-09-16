@@ -3,6 +3,7 @@ import json
 
 JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/'
 
+print("tägi1, tägi2, tägi3") #Lisätään oikeat tägit eri aihealueista myöhemmin.
 usertags = input("Valitse yksi tägeistä: ").strip().upper() #tähän voisi listata pari esimerkki tägiä jsonista jotta käyttäjä pystyisi kirjoittamaan niitä.
 
 
