@@ -3,7 +3,7 @@ import json
 
 JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/'
 
-usertags = input("Kirjoita mielenkiinnonkohteesi: ").strip().upper() #tähän voisi listata pari esimerkki tägiä jsonista jotta käyttäjä pystyisi kirjoittamaan niitä.
+usertags = input("Valitse yksi tägeistä: ").strip().upper() #tähän voisi listata pari esimerkki tägiä jsonista jotta käyttäjä pystyisi kirjoittamaan niitä.
 
 
 
