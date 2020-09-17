@@ -1,13 +1,13 @@
 import urllib.request
 import json
 
-JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/' # ?limit=20
+JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/'
 
 # tähän voisi listata pari esimerkki tägiä jsonista jotta käyttäjä pystyisi kirjoittamaan niitä.
 
 
-def get_activities():
-    with urllib.request.urlopen(JSON_URL) as response:
+def get_activities(url):
+    with urllib.request.urlopen(url) as response:
         return json.loads(response.read())
 
 # Fetch the tags from an activity
@@ -47,20 +47,34 @@ def searchtags(data, chosen):
         # loop every value in data['tags'] in x position/value
         for y in x['tags']:
             # if chosen(user input) value found inside, then print the activitys finnish name
-            if chosen in y['name']:
+            if chosen in y['name'].lower():
                 print(x['name']['fi'])
                 # if chosen found in tags, do not go through all tags (might give duplicates otherwise)
                 break
 
 # Get activities, print tags, save user input, print input for clarity, use funktion search
+def searchtags_2():
+    chosen = input("Kirjoita valitsemasi tägit pilkulla eroteltuna: ").lower()
+    if ", " in chosen:
+        
+    #Jos tägejä on useampi...
+        #Muokataan annettua stringiä niin että sanojen väliin tulee %2C%20
+
+    #Pläntätään stringi findtags="http://open-api.myhelsinki.fi/v1/activities/?tags_search=tähän"
+
+    #foundactivities = get_activities(findtags)
+
+    #for looppi jolla esitellään jotenkin järkevästi saatu data terminaalissa esimerkiksi foundactivities['data']['name']['fi'] näin alkuun
+        #Vastaus tähän löytynee searchtags versio ykkösestä
 
 
 def main():
-    activities = get_activities()
+    activities = get_activities(JSON_URL)
     print(printtags(activities))
-    chosen = input("Valitse yksi tägeistä: ").strip().lower()
+    searchtags_2()
+    """ chosen = input("Valitse yksi tägeistä: ").strip().lower()
     print("valitsit tägin: " + chosen)
-    searchtags(activities['data'], chosen)
+    searchtags(activities['data'], chosen) """
 
 
 """ def tools():
