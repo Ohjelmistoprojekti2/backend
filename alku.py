@@ -53,19 +53,26 @@ def searchtags(data, chosen):
                 break
 
 # Get activities, print tags, save user input, print input for clarity, use funktion search
+
+
 def searchtags_2():
-    chosen = input("Kirjoita valitsemasi tägit pilkulla eroteltuna: ").lower()
-    if ", " in chosen:
-        
-    #Jos tägejä on useampi...
-        #Muokataan annettua stringiä niin että sanojen väliin tulee %2C%20
 
-    #Pläntätään stringi findtags="http://open-api.myhelsinki.fi/v1/activities/?tags_search=tähän"
+    chosen = input(
+        "Kirjoita valitsemasi tägit pilkulla eroteltuna: ").lower().strip()
+    # Jos tägejä on useampi...
+    # Muokataan annettua stringiä niin että sanojen väliin tulee %2C%20
+    if ", " or "," in chosen:
+        chosen = chosen.replace(", " or ",", "%2C%20")
 
-    #foundactivities = get_activities(findtags)
+    # Pläntätään stringi findtags="http://open-api.myhelsinki.fi/v1/activities/?tags_search=tähän"
+    findtags = "http://open-api.myhelsinki.fi/v1/activities/?tags_search="+chosen
 
-    #for looppi jolla esitellään jotenkin järkevästi saatu data terminaalissa esimerkiksi foundactivities['data']['name']['fi'] näin alkuun
-        #Vastaus tähän löytynee searchtags versio ykkösestä
+    foundactivities = get_activities(findtags)
+    # for looppi jolla esitellään jotenkin järkevästi saatu data terminaalissa esimerkiksi foundactivities['data']['name']['fi'] näin alkuun
+    # Vastaus tähän löytynee searchtags versio ykkösestä
+    for x in foundactivities['data']:
+        print(x['name']['fi'])
+        # print(foundactivities['data']['name']['fi'])
 
 
 def main():
