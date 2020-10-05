@@ -59,6 +59,13 @@ def return_activities(activities = get_activities()):
 def return_tags(activities = get_activities()):
     return jsonify({'tags': printtags(activities)})
 
+@app.route('/app/activities/search', methods=['GET'])
+def return_activitysearch():
+    tags = request.args.get('tags')
+
+    with urllib.request.urlopen("http://open-api.myhelsinki.fi/v1/activities/?tags_search="+tags) as response:
+        return json.loads(response.read())
+
 
 if __name__ == '__main__':
     app.run(debug=True)
