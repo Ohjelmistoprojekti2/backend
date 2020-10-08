@@ -7,22 +7,18 @@ app = Flask(__name__)
 
 JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/' # ?limit=20
 
-# tähän voisi listata pari esimerkki tägiä jsonista jotta käyttäjä pystyisi kirjoittamaan niitä.
 
-
+# Hakee aktiviteetit, katon jos tartten.
 def get_activities():
     with urllib.request.urlopen(JSON_URL) as response:
         return json.loads(response.read())
 
-# Return activity['tags'] dictionaryn value arvot
-
-
+# Return activity['tags'] dictionaryn value arvot listana.
 def printtags(activities):
     return list(activities['tags'].values())
 
 # Search activities['data'] with given input to find activities with matching tags
-
-
+# Pidän tän täs silt varalt et tätä tarttee.
 def searchtags(data, chosen):
     # loop every value in data
     for x in data:
@@ -34,7 +30,7 @@ def searchtags(data, chosen):
                 # if chosen found in tags, do not go through all tags (might give duplicates otherwise)
                 break
 
-
+# Pidän tän täs silt varalt et tätä tarttee.
 def post_activities(data, chosen):
 
     list = []
@@ -51,14 +47,17 @@ def post_activities(data, chosen):
 
 # Flask jutut.
 
+# Aktiviteetit
 @app.route('/app/activities', methods=['GET'])
 def return_activities(activities = get_activities()):
     return jsonify({'activities': activities['data']})
 
+# Tägit
 @app.route('/app/tags', methods=['GET'])
 def return_tags(activities = get_activities()):
     return jsonify({'tags': printtags(activities)})
 
+# Hae aktiviteettejä tägien mukaan
 @app.route('/app/activities/search', methods=['GET'])
 def return_activitysearch():
     tags = request.args.get('tags')
