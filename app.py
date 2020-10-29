@@ -8,7 +8,7 @@ app = Flask(__name__)
 JSON_URL = 'http://open-api.myhelsinki.fi/v1/activities/' # ?limit=20
 
 
-# Hakee aktiviteetit, katon jos tartten.
+# Hakee aktiviteetit.
 def get_activities():
     with urllib.request.urlopen(JSON_URL) as response:
         return json.loads(response.read())
